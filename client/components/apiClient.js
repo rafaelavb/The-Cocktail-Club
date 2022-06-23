@@ -8,6 +8,11 @@ export function getCocktailApi() {
     .then((response) => response.body)
 }
 
+export function getRandomCocktailApi() {
+  return request
+    .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+    .then((response) => response.body)
+}
 
 export function getNonAlcoholic() {
   return request
