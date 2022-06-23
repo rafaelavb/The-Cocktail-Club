@@ -29,4 +29,15 @@ router.get('/randomcocktail', (req, res) => {
     })
 })
 
+router.get('/liquortype', (req, res)=> {
+  request.then((response) => {
+    //consoloe.log(response.body)
+    res.json(response.body)
+  })
+  .catch((err) => {
+    console.error(err.message)
+    res.status(500).send('err')
+  })
+})
+
 module.exports = router

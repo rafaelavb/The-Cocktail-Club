@@ -2,6 +2,9 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './Home'
+import LiquorType from './LiquorType'
+
+
 
 import { Routes, Route } from 'react-router-dom'
 import Alcoholic from './Alcoholic'
