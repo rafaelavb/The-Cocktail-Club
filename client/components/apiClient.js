@@ -9,7 +9,6 @@ export function getCocktailApi() {
 }
 
 export function getIngredientByName(name) {
-  console.log('hi')
   return request
     .get(`${serverURL}search.php?i=${name}`)
     .then((response) => response.body)

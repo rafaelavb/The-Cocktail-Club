@@ -35,9 +35,15 @@ function Ingredient(props) {
     <div>
       {console.log(details)}
       <h3>{details.data.strIngredient}</h3>
+      <img
+        src={`https://www.thecocktaildb.com/images/ingredients/${name.toLowerCase()}-Medium.png`}
+        alt={`${name} thumbnail`}
+      />
       <p>Type: {details.data.strType}</p>
       <p>Alcoholic: {details.data.strAlcohol}</p>
-      <button onClick={handleClick}>Description</button>
+      {details.data.strDescription && (
+        <button onClick={handleClick}>Description</button>
+      )}
       {showDesc && <p>{details.data.strDescription}</p>}
     </div>
   )
