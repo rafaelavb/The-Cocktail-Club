@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import Nav from './Nav'
 import Home from './Home'
+import { getNonAlcoholic } from './apiClient'
 
 function App() {
   return (
