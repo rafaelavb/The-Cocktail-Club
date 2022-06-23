@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from 'react'
-// import { Link } from 'react-router-dom'
-import { getRandomCocktailApi } from './apiClient'
+import React from 'react'
 
-function RandomCocktail() {
-  const [cocktail, setCocktail] = useState({ loading: true })
-
-  useEffect(() => {
-    getRandomCocktailApi()
-      .then((data) => {
-        setCocktail({ data: data.drinks })
-      })
-      .catch((err) => {
-        console.log(err.message)
-        setCocktail({ error: err.message })
-      })
-  }, [])
-
-  if (cocktail.loading) {
+function RandomCocktail(props) {
+  if (props.cocktail.loading) {
     return <p>Loading...</p>
   }
 
-  if (cocktail.error) {
+  if (props.cocktail.error) {
     return <p>Sorry! Something went wrong</p>
   }
 
   return (
     <ul>
-      {cocktail.data.map((drink) => (
+      {props.cocktail.data.map((drink) => (
         <div key={drink.idDrink}>
           <h3>Name: {drink.strDrink}</h3>
           <h3>{drink.strAlcoholic}</h3>
