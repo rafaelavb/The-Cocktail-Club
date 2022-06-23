@@ -3,6 +3,14 @@ import { Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './Home'
 
+import { Routes, Route } from 'react-router-dom'
+import Alcoholic from './Alcoholic'
+import NonAlcoholic from './NonAlcoholic'
+import Ingredients from './Ingredients'
+
+
+
+
 import RandomCocktail from './RandomCocktail'
 import { getNonAlcoholic } from './apiClient'
 
@@ -17,6 +25,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/randomcocktail" element={<RandomCocktail />} />
+          <Route path="/alcoholic" element={<Alcoholic />} />
+          <Route path="/ingredients" element={<Ingredients />} />
+          <Route path="/non-alcoholic" element={<NonAlcoholic />} />
+          <Route path="/liquortype" element={<LiquorType />} />
         </Routes>
 
       <h1>Welcome to The Cocktail Club</h1>
@@ -26,6 +38,7 @@ function App() {
         <Home />
         <Nav />
         
+
       </div>
     </>
   )
