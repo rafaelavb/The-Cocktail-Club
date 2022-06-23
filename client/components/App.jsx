@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <h1>{cocktail?.strDrink}</h1>
-      <div className="title">
+      <div>
         <img
           src="/images/color_earth.gif"
           alt="A coloured globe of the earth spinning around on its axis"
