@@ -7,6 +7,7 @@ import LiquorType from './LiquorType'
 import Alcoholic from './Alcoholic'
 import NonAlcoholic from './NonAlcoholic'
 import Ingredients from './Ingredients'
+import GlassType from './GlassType'
 
 import RandomCocktail from './RandomCocktail'
 import { getNonAlcoholic } from './apiClient'
@@ -16,6 +17,7 @@ function App() {
     <>
       {/* This 'main' div is only for styling (so we can use flexbox) */}
       <div className="main">
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/randomcocktail" element={<RandomCocktail />} />
@@ -23,6 +25,7 @@ function App() {
           <Route path="/ingredients" element={<Ingredients />} />
           <Route path="/non-alcoholic" element={<NonAlcoholic />} />
           <Route path="/liquortype" element={<LiquorType />} />
+          <Route path="/glasstype" element={<GlassType />} />
         </Routes>
 
         <h1>Welcome to The Cocktail Club</h1>
@@ -30,7 +33,6 @@ function App() {
         {/* This 'main' div is only for styling (so we can use flexbox) */}
 
         <Home />
-        <Nav />
       </div>
     </>
   )
