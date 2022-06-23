@@ -57,7 +57,8 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "superagent": "^7.1.6"
   },
   "prettier": {
     "semi": false,
