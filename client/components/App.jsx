@@ -8,6 +8,7 @@ import Alcoholic from './Alcoholic'
 import NonAlcoholic from './NonAlcoholic'
 import Ingredients from './Ingredients'
 import RandomCocktail from './RandomCocktail'
+import PageNotFound from './PageNotFound'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/ingredients" element={<Ingredients />} />
           <Route path="/non-alcoholic" element={<NonAlcoholic />} />
           <Route path="/liquortype" element={<LiquorType />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </>

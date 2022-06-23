@@ -7,6 +7,8 @@ const server = express()
 
 server.use(express.static(path.join(__dirname, 'public')))
 
-// server.use('/api/v1/cocktailbar', cocktailbar)
+server.all('*', (req, res) => {
+  res.redirect('/')
+})
 
 module.exports = server
