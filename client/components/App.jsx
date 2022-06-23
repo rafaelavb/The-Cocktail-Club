@@ -1,37 +1,47 @@
-import React, { useState, useEffect } from 'react'
-
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './Home'
-import { getCocktailApi } from './apiClient'
 import LiquorType from './LiquorType'
 
+
+
+import { Routes, Route } from 'react-router-dom'
+import Alcoholic from './Alcoholic'
+import NonAlcoholic from './NonAlcoholic'
+import Ingredients from './Ingredients'
+
+
+
+
+import RandomCocktail from './RandomCocktail'
+import { getNonAlcoholic } from './apiClient'
+
+
 function App() {
-  const [cocktail, setRandomCocktail] = useState(null)
-
-  useEffect(() => {
-    getCocktailApi()
-      .then((res) => {
-        console.log(res)
-        setRandomCocktail(res.drinks[0])
-      })
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }, [])
-
   return (
     <>
-      <h1>{cocktail?.strDrink}</h1>
-      <div>
-        <img
-          src="/images/color_earth.gif"
-          alt="A coloured globe of the earth spinning around on its axis"
-        />
-      </div>
+
+      
       {/* This 'main' div is only for styling (so we can use flexbox) */}
       <div className="main">
-        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/randomcocktail" element={<RandomCocktail />} />
+          <Route path="/alcoholic" element={<Alcoholic />} />
+          <Route path="/ingredients" element={<Ingredients />} />
+          <Route path="/non-alcoholic" element={<NonAlcoholic />} />
+          <Route path="/liquortype" element={<LiquorType />} />
+        </Routes>
+
+      <h1>Welcome to The Cocktail Club</h1>
+
+      {/* This 'main' div is only for styling (so we can use flexbox) */}
+      
         <Home />
+        <Nav />
+        
+
       </div>
     </>
   )

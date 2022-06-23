@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAlcoholic } from './apiClient'
+import { getNonAlcoholic } from './apiClient'
 
-function Alcoholic() {
+function NonAlcoholic() {
   const [drinks, setDrinks] = useState({ loading: true })
 
   useEffect(() => {
-    getAlcoholic()
+    getNonAlcoholic()
       .then((data) => {
         setDrinks({ data: data.drinks })
       })
-      .catch((err) => {
-        setDrinks({ error: err.message })
-      })
+      .catch((err) => console.log(err))
   }, [])
 
   if (drinks.loading) {
@@ -30,7 +28,7 @@ function Alcoholic() {
           <h3>{drink.strDrink}</h3>
           <img
             src={drink.strDrinkThumb}
-            alt={`the alchoholic drink "${drink.strDrink}"`}
+            alt={`non-alchoholic drink "${drink.strDrink}"`}
           />
         </div>
       ))}
@@ -38,4 +36,4 @@ function Alcoholic() {
   )
 }
 
-export default Alcoholic
+export default NonAlcoholic
