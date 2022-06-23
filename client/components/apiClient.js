@@ -8,8 +8,13 @@ export function getCocktailApi() {
     .then((response) => response.body)
 }
 
+
+export function getNonAlcoholic() {
+  return request
+    .get(`${serverURL}filter.php?a=Non_Alcoholic`).then((response) => response.body)
+}
+
 export function getIngredientByName(name) {
   return request
-    .get(`${serverURL}search.php?i=${name}`)
-    .then((response) => response.body)
+    .get(`${serverURL}search.php?i=${name}`).then((response) => response.body)
 }
