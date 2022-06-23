@@ -5,32 +5,14 @@ import Home from './Home'
 import { getNonAlcoholic } from './apiClient'
 
 function App() {
-  const [cocktail, setRandomCocktail] = useState(null)
-
-  useEffect(() => {
-    getCocktailApi()
-      .then((res) => {
-        console.log(res)
-        setRandomCocktail(res.drinks[0])
-      })
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }, [])
-
   return (
     <>
-      <h1>{cocktail?.strDrink}</h1>
-      <div>
-        <img
-          src="/images/color_earth.gif"
-          alt="A coloured globe of the earth spinning around on its axis"
-        />
-      </div>
+      <h1>Welcome to The Cocktail Club</h1>
+
       {/* This 'main' div is only for styling (so we can use flexbox) */}
-      <div className="main">
-        <Nav />
+      <div>
         <Home />
+        <Nav />
       </div>
     </>
   )
