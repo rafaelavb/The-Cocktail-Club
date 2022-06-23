@@ -6,7 +6,7 @@ function PageNotFound() {
       <h1>Page not found. Sorry!</h1>
       <iframe
         className="youtube"
-        src={`https://www.youtube.com/embed/csn2CIWPVbM?autoplay=1&controls=1&rel=0&loop=0`}
+        src={`https://www.youtube.com/embed/csn2CIWPVbM?autoplay=1&controls=0&rel=0&loop=0`}
         allow="autoplay"
         width="800px"
         height="450px"
