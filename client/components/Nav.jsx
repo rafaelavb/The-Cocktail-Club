@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Nav() {
+function Nav(props) {
+  const handleLinkClick = () => {
+    props.fetchCocktail()
+  }
+
   return (
     <>
       <div className="main">
@@ -34,7 +38,9 @@ function Nav() {
         </li>
         <li>
           <b>
-            <Link to={'/randomcocktail'}>{'Random Cocktail'}</Link>
+            <Link onClick={() => handleLinkClick()} to={'/randomcocktail'}>
+              {'Random Cocktail'}
+            </Link>
           </b>
         </li>
       </div>
