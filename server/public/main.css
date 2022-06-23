@@ -1,28 +1,38 @@
 body {
-  background-color: #faf8f1;
-  color: #0a1520;
+  background-color: #c9a21582;
+  color: #fafafa;
   font-family: 'Poppins', sans-serif;
+  background-image: url('./images/background 2.jpg') ; 
+  background-size: 25%;
+  text-align: center;
+  font-size: 30px;
+  
 }
 
-.main, .title {
-  display: flex;
-  flex-direction: row;
+a{
+  color: rgb(0, 0, 0);
+  text-decoration-line: underline;
 }
 
-.title img {
-  height: 5rem;
-  width: 5rem;
-  padding-right: 30px;
+li{
+  padding-top: 40px;
+  list-style: none;
+  text-align: center;
 }
 
-.main div {
+
+.main {
+  align-self: start;
+  background-color: rgba(238, 238, 238, 0.644);
+  color: rgb(0, 0, 0);
   margin: 0px 10px 0px 10px;
+  text-align: center;
+  font-size: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+
 }
 
-a {
-  text-decoration-line: none;
-}
 
-img {
-  max-height: 200px;
-}
+

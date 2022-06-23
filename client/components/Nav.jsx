@@ -3,29 +3,42 @@ import { Link } from 'react-router-dom'
 
 function Nav() {
   return (
-    <div>
-      <h2>Browse by...</h2>
-      <ul>
+    <>
+      <div className="main">
+        <h2>Browse by...</h2>
+
         <li>
-          <Link to={'/alcoholic'}>{'Alcoholic'}</Link>
+          <b>
+            <Link to={'/alcoholic'}>{'Alcoholic'}</Link>
+          </b>
         </li>
         <li>
-          <Link to={'/non-alcoholic'}>{'Non-Alcoholic'}</Link>
+          <b>
+            <Link to={'/non-alcoholic'}>{'Non-Alcoholic'}</Link>
+          </b>
         </li>
         <li>
-          <Link to={'/ingredients'}>{'Ingredients'}</Link>
+          <b>
+            <Link to={'/ingredients'}>{'Ingredients'}</Link>
+          </b>
         </li>
         <li>
-          <Link to={'/glasstype'}>{'Glass Type'}</Link>
+          <b>
+            <Link to={'/glasstype'}>{'Glass Type'}</Link>
+          </b>
         </li>
         <li>
-          <Link to={'/liquortype'}>{'Liquor Type'}</Link>
+          <b>
+            <Link to={'/liquortype'}>{'Liquor Type'}</Link>
+          </b>
         </li>
         <li>
-          <Link to={'/randomcocktail'}>{'Random Cocktail'}</Link>
+          <b>
+            <Link to={'/randomcocktail'}>{'Random Cocktail'}</Link>
+          </b>
         </li>
-      </ul>
-    </div>
+      </div>
+    </>
   )
 }
 
