@@ -3,7 +3,8 @@ import { getDrinksByIngredient, getIngredientCategories } from './apiClient'
 
 function FilterByIngredients() {
   /* possible: Object key=ingredient, value = array of possible drink(s) objects for ingredient */
-  const [possible, setPossible] = useState({})
+  const [possible, setPossible] = useState(null)
+  const [allPossible, setAllPossible] = useState(null)
   /* drinks: Array of drink names?/ids? which can be made from selected ingredients */
   const [drinks, setDrinks] = useState([])
   //const [selected, setSelected] = useState([])
@@ -19,26 +20,40 @@ function FilterByIngredients() {
   //   setSelected([...selected])
   // })
 
-  useEffect(() => {
-    selected.map((ingredient) => {
+  const getDrinksForIngredients = new Promise((resolve, reject) => {
+    const isPossible = {}
+
+    selected.forEach((ingredient) => {
       getDrinksByIngredient(ingredient)
         .then((data) => {
-          // console.log('data', data)
-          // console.log('ing', ingredient)
-          // console.log('data.drinks', data.drinks)
-          setPossible((prev) => ({ ...prev, [ingredient]: data.drinks }))
+          isPossible[ingredient] = data
         })
-        .catch((err) => {
-          console.error(err)
-        })
+        .catch((err) => console.error(err))
+      console.log('ingredient')
     })
+
+    console.log('isPossible?', JSON.stringify(isPossible))
+    resolve(isPossible)
+  })
+
+  useEffect(() => {
+    getDrinksForIngredients
+      .then((isPossible) => {
+        console.log('isPossible', JSON.stringify(isPossible))
+        if (Object.keys(isPossible) > 0) {
+          console.log('setting possible')
+          setPossible(isPossible)
+        }
+      })
+      .catch((err) => console.error(err))
   }, [selected])
 
   useEffect(() => {
+    if (!allPossible) return
     // console.log('possible', possible)
-    // console.log('allPossibleDrinks', allPossibleDrinks())
+    // console.log('allPossible', allPossible)
     setDrinks(
-      allPossibleDrinks().filter((drink) => {
+      allPossible.filter((drink) => {
         let flag = true
         Object.keys(possible).forEach((ingredient) => {
           if (!possible[ingredient].includes(drink)) {
@@ -48,29 +63,44 @@ function FilterByIngredients() {
         return flag
       })
     )
-  }, [possible])
+  }, [allPossible])
 
-  const allPossibleDrinks = () => {
-    const allPossible = []
-    // console.log('possible', possible)
+  useEffect(() => {
+    if (!possible) return
 
-    Object.keys(possible).forEach((ingredient) => {
-      Object.values(possible[ingredient]).forEach((drink) => {
-        // console.log('ing', ingredient, 'drink', drink)
-        if (!allPossible.includes(drink)) {
-          allPossible.push(drink)
-        }
-      })
-    })
+    // const allPossibleArr = []
+
+    console.log('possible', JSON.stringify(possible))
+    console.log('possible["Salt"]', possible['Salt'])
+    console.log('possibleKeys', Object.keys(possible))
+    console.log('possibleEntries', Object.entries(possible))
+    const myPossible = { ...possible }
+    console.log('myPossible', myPossible)
+    console.log('myPossibleKeys', Object.keys(myPossible))
+    console.log('myPossibleEntries', Object.entries(myPossible))
+
+    // selected.forEach((ingredient) => {
+    //   console.log('ingredient', ingredient)
+    //   console.log('pi', possible[ingredient])
+    //   possible[ingredient].forEach((drink) => {
+    //     console.log('ing', ingredient, 'drink', drink)
+    //     if (!allPossibleArr.includes(drink)) {
+    //       allPossibleArr.push(drink)
+    //     }
+    //   })
+    // })
+
+    // console.log('allPossibleArr', allPossibleArr)
+    // setAllPossible(allPossibleArr)
 
     // console.log('allPossible', allPossible)
-    return allPossible
-  }
+  }, [possible])
+
   return (
     <>
       <SelectIngredients />
-      {console.log('drinks', drinks)}
-      {drinks.map((d) => (
+      {/* {console.log('drinks', drinks)} */}
+      {drinks?.map((d) => (
         <p key={d.idDrink}>{d.strDrink}</p>
       ))}
     </>
