@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import { getGlassType } from './apiClient'
 
-function Glass(props) {
+function GlassCocktail(props) {
   const { name } = props
   const [details, setDetails] = useState({ loading: true })
 
@@ -26,4 +26,4 @@ function Glass(props) {
   )
 }
 
-export default Glass
+export default GlassCocktail
