@@ -28,6 +28,11 @@ function Nav(props) {
         </li>
         <li>
           <b>
+            <Link to={'/ingredients-filter'}>{'Filter by Ingredients'}</Link>
+          </b>
+        </li>
+        <li>
+          <b>
             <Link to={'/glasstype'}>{'Glass Type'}</Link>
           </b>
         </li>
