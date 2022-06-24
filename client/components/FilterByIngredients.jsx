@@ -1,107 +1,70 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getDrinksByIngredient, getIngredientCategories } from './apiClient'
 
 function FilterByIngredients() {
   /* possible: Object key=ingredient, value = array of possible drink(s) objects for ingredient */
-  const [possible, setPossible] = useState(null)
-  const [allPossible, setAllPossible] = useState(null)
   /* drinks: Array of drink names?/ids? which can be made from selected ingredients */
   const [drinks, setDrinks] = useState([])
   //const [selected, setSelected] = useState([])
   const [selected, setSelected] = useState([
-    'Tequila',
-    'Triple sec',
-    'Lime juice',
-    'Salt',
+    'Jack Daniels',
+    'Johnnie Walker',
+    'Jim Beam',
   ]) //testing
 
-  // delete this after testing
-  // useEffect(() => {
-  //   setSelected([...selected])
-  // })
-
-  const getDrinksForIngredients = new Promise((resolve, reject) => {
-    const isPossible = {}
-
-    selected.forEach((ingredient) => {
-      getDrinksByIngredient(ingredient)
-        .then((data) => {
-          isPossible[ingredient] = data
-        })
-        .catch((err) => console.error(err))
-      console.log('ingredient')
-    })
-
-    console.log('isPossible?', JSON.stringify(isPossible))
-    resolve(isPossible)
-  })
-
   useEffect(() => {
-    getDrinksForIngredients
-      .then((isPossible) => {
-        console.log('isPossible', JSON.stringify(isPossible))
-        if (Object.keys(isPossible) > 0) {
-          console.log('setting possible')
-          setPossible(isPossible)
-        }
+    const allDrinks = Promise.all(
+      selected.map((ingredient) => {
+        return getDrinksByIngredient(ingredient).then((res) => res.body)
+      })
+    )
+
+    allDrinks
+      .then((data) => {
+        // console.log(data)
+        // console.log('allDrinks', JSON.stringify(data))
+        setDrinks(
+          data[0].drinks.filter((drink) => {
+            console.log(data[0].drinks)
+            console.log(data[1].drinks)
+            console.log(data[2].drinks)
+            for (let i = 1; i < data.length; i++) {
+              for (let j = 0; j < data[i].drinks.length; j++) {
+                if (drink.idDrink != data[i].drinks[j].idDrink) {
+                  console.log(
+                    'a',
+                    drink.idDrink,
+                    'b',
+                    data[i].drinks[j].idDrink
+                  )
+                  console.log(drink.idDrink != data[i].drinks[j].idDrink)
+                  return false
+                }
+                return true
+              }
+            }
+          })
+        )
       })
       .catch((err) => console.error(err))
   }, [selected])
 
-  useEffect(() => {
-    if (!allPossible) return
-    // console.log('possible', possible)
-    // console.log('allPossible', allPossible)
-    setDrinks(
-      allPossible.filter((drink) => {
-        let flag = true
-        Object.keys(possible).forEach((ingredient) => {
-          if (!possible[ingredient].includes(drink)) {
-            flag = false
-          }
-        })
-        return flag
-      })
-    )
-  }, [allPossible])
-
-  useEffect(() => {
-    if (!possible) return
-
-    // const allPossibleArr = []
-
-    console.log('possible', JSON.stringify(possible))
-    console.log('possible["Salt"]', possible['Salt'])
-    console.log('possibleKeys', Object.keys(possible))
-    console.log('possibleEntries', Object.entries(possible))
-    const myPossible = { ...possible }
-    console.log('myPossible', myPossible)
-    console.log('myPossibleKeys', Object.keys(myPossible))
-    console.log('myPossibleEntries', Object.entries(myPossible))
-
-    // selected.forEach((ingredient) => {
-    //   console.log('ingredient', ingredient)
-    //   console.log('pi', possible[ingredient])
-    //   possible[ingredient].forEach((drink) => {
-    //     console.log('ing', ingredient, 'drink', drink)
-    //     if (!allPossibleArr.includes(drink)) {
-    //       allPossibleArr.push(drink)
-    //     }
-    //   })
-    // })
-
-    // console.log('allPossibleArr', allPossibleArr)
-    // setAllPossible(allPossibleArr)
-
-    // console.log('allPossible', allPossible)
-  }, [possible])
-
   return (
     <>
       <SelectIngredients />
-      {/* {console.log('drinks', drinks)} */}
-      {drinks?.map((d) => (
-        <p key={d.idDrink}>{d.strDrink}</p>
+      <h2>Cocktails you could make:</h2>
+      {drinks.map((drink) => (
+        <div key={drink.idDrink}>
+          <Link to={`/drink/${drink.idDrink}`}>
+            <h3>{drink.strDrink}</h3>
+          </Link>
+          <img
+            className="image"
+            src={drink.strDrinkThumb}
+            alt={`the alchoholic drink "${drink.strDrink}"`}
+          />
+        </div>
       ))}
     </>
   )
