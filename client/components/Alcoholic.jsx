@@ -27,7 +27,9 @@ function Alcoholic() {
     <ul>
       {drinks.data.map((drink) => (
         <div key={drink.idDrink}>
-          <h3>{drink.strDrink}</h3>
+          <Link to={`/drink/${drink.idDrink}`}>
+            <h3>{drink.strDrink}</h3>
+          </Link>
           <img
             src={drink.strDrinkThumb}
             alt={`the alchoholic drink "${drink.strDrink}"`}
