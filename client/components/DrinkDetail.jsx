@@ -37,6 +37,10 @@ function DrinkDetail() {
           </p>
         </div>
         <p>Instructions: {drinks.data.strInstructions}</p>
+        <img
+          src={drinks.data.strDrinkThumb}
+          alt={`the drink "${drinks.data.strDrink}"`}
+        ></img>
       </div>
     </ul>
   )
