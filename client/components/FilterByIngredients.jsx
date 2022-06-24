@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { getDrinksByIngredient, getIngredientCategories } from './apiClient'
 
 function FilterByIngredients() {
-  /* possible: Object key=ingredient, value = array of possible drink(s) objects for ingredient */
-  /* drinks: Array of drink names?/ids? which can be made from selected ingredients */
   const [drinks, setDrinks] = useState([])
-  //const [selected, setSelected] = useState([])
-  const [selected, setSelected] = useState([
-    'Jack Daniels',
-    'Johnnie Walker',
-    'Jim Beam',
-  ]) //testing
+  const [selected, setSelected] = useState([])
+  // const [selected, setSelected] = useState([
+  //   'Jack Daniels',
+  //   'Johnnie Walker',
+  //   'Jim Beam',
+  // ]) //testing
 
   useEffect(() => {
+    if (selected.length < 1) return
     const allDrinks = Promise.all(
       selected.map((ingredient) => {
         return getDrinksByIngredient(ingredient).then((res) => res.body)
@@ -22,23 +21,11 @@ function FilterByIngredients() {
 
     allDrinks
       .then((data) => {
-        // console.log(data)
-        // console.log('allDrinks', JSON.stringify(data))
         setDrinks(
           data[0].drinks.filter((drink) => {
-            console.log(data[0].drinks)
-            console.log(data[1].drinks)
-            console.log(data[2].drinks)
             for (let i = 1; i < data.length; i++) {
               for (let j = 0; j < data[i].drinks.length; j++) {
                 if (drink.idDrink != data[i].drinks[j].idDrink) {
-                  console.log(
-                    'a',
-                    drink.idDrink,
-                    'b',
-                    data[i].drinks[j].idDrink
-                  )
-                  console.log(drink.idDrink != data[i].drinks[j].idDrink)
                   return false
                 }
                 return true
@@ -50,9 +37,19 @@ function FilterByIngredients() {
       .catch((err) => console.error(err))
   }, [selected])
 
+  const handleSelected = (usrSelected) => {
+    setSelected((prev) => [...prev, usrSelected])
+  }
+
   return (
     <>
-      <SelectIngredients />
+      <SelectIngredients onSelection={handleSelected} />
+      <h3>Your selection:</h3>
+      <ul>
+        {selected?.map((s) => (
+          <li key={s}>{s}</li>
+        ))}
+      </ul>
       <h2>Cocktails you could make:</h2>
       {drinks.map((drink) => (
         <div key={drink.idDrink}>
@@ -70,18 +67,35 @@ function FilterByIngredients() {
   )
 }
 
-function SelectIngredients() {
+function SelectIngredients(props) {
+  const { onSelection } = props
   const [options, setOptions] = useState({ loading: true })
+  const [current, setCurrent] = useState(null)
 
   useEffect(() => {
     getIngredientCategories()
       .then((data) => {
-        setOptions({ data: data.drinks })
+        setOptions({
+          data: data.drinks.sort((a, b) =>
+            a.strIngredient1.localeCompare(b.strIngredient1)
+          ),
+        })
+        setCurrent(data.drinks[0].strIngredient1)
       })
       .catch((err) => {
         setOptions({ error: err.message })
       })
   }, [])
+
+  const handleClick = (evt) => {
+    console.log('Adding ' + current)
+    onSelection(current)
+  }
+
+  const handleChange = (evt) => {
+    console.log(evt.target.value)
+    setCurrent(evt.target.value)
+  }
 
   if (options.loading) {
     return <p>Loading ingredients...</p>
@@ -92,17 +106,20 @@ function SelectIngredients() {
   }
 
   return (
-    <fieldset>
-      <legend>Select your ingredients:</legend>
-      {options.data.map((ingredient) => (
-        <div key={ingredient.strIngredient1}>
-          <input type="checkbox" name={ingredient.strIngredient1} />
-          <label htmlFor={ingredient.strIngredient1}>
+    <>
+      <label htmlFor="ingredients">Select your ingredients:</label>
+      <select name="ingredients" id="ingredients" onChange={handleChange}>
+        {options.data.map((ingredient) => (
+          <option
+            key={ingredient.strIngredient1}
+            value={ingredient.strIngredient1}
+          >
             {ingredient.strIngredient1}
-          </label>
-        </div>
-      ))}
-    </fieldset>
+          </option>
+        ))}
+      </select>
+      <button onClick={handleClick}>Add</button>
+    </>
   )
 }
 
