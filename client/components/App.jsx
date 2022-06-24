@@ -49,8 +49,8 @@ function App() {
           <Route path="/ingredients" element={<Ingredients />} />
           <Route path="/non-alcoholic" element={<NonAlcoholic />} />
           <Route path="/glasstype" element={<GlassType />} />
-          <Route path="/GlassCocktail" element={<GlassCocktail />} />
-          <Route path="/GlassFlute" element={<GlassFlute />} />
+          <Route path="/Cocktail_glass" element={<GlassCocktail />} />
+          <Route path="/Champagne_flute" element={<GlassFlute />} />
           <Route path="/liquortype" element={<LiquorType />} />
           <Route path="/drink/:idDrink" element={<DrinkDetail />} />
           <Route path="*" element={<PageNotFound />} />

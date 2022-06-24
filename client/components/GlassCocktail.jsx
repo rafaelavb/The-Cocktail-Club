@@ -7,10 +7,10 @@ function GlassCocktail(props) {
   const [details, setDetails] = useState({ loading: true })
 
   useEffect(() => {
-    getGlassType(name)
+    getGlassType('Cocktail_glass')
       .then((data) => {
-        console.log(data)
-        setDetails({ data: data.drinks })
+        console.log(data.body.drinks)
+        setDetails({ data: data.body.drinks })
       })
       .catch((err) => {
         setDetails({ error: err.message })
@@ -21,7 +21,20 @@ function GlassCocktail(props) {
   }
   return (
     <>
-      <div>Hey</div>
+      {console.log(details)}
+
+      <ul>
+        {details.loading ? (
+          <p>Loading...</p>
+        ) : (
+          details.data.map((drinks) => (
+            <div key={drinks.idDrink}>
+              <li key={drinks.idDrink}>{drinks.strDrink}</li>
+              <img src={drinks.strDrinkThumb} alt={`A "${drinks.strDrink}"`} />
+            </div>
+          ))
+        )}
+      </ul>
     </>
   )
 }
