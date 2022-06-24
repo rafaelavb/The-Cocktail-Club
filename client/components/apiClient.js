@@ -42,3 +42,9 @@ export function getIngredientCategories() {
     .get(`${serverURL}list.php?i=list`)
     .then((response) => response.body)
 }
+
+export function getDrinksByIngredient(name) {
+  return request
+    .get(`${serverURL}filter.php?i=${name}`)
+    .then((response) => response.body)
+}
