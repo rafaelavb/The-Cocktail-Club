@@ -9,7 +9,8 @@ function DrinkDetail() {
   useEffect(() => {
     getDetailbyId(idDrink)
       .then((data) => {
-        setDrinks({ data: data.drinks })
+        console.log(data)
+        setDrinks({ data: data.drinks[0] })
       })
       .catch((err) => console.log(err))
   }, [])
@@ -26,13 +27,16 @@ function DrinkDetail() {
     <ul>
       <div>
         <h3>{drinks.data.strDrink}</h3>
-        <p>{drinks.data.strAlcoholic}</p>
-        <p>{drinks.data.strGlass}</p>
-        <p>{drinks.data.strIngredient1}</p>
-        <p>{drinks.data.strIngredient2}</p>
-        <p>{drinks.data.strIngredient3}</p>
-        <p>{drinks.data.strIngredient4}</p>
-        <p>{drinks.data.Instructions}</p>
+        <p>Alcohol Type: {drinks.data.strAlcoholic}</p>
+        <p>Glass Type: {drinks.data.strGlass}</p>
+        <div>
+          Ingredients:
+          <p>
+            {drinks.data.strIngredient1},{drinks.data.strIngredient2},
+            {drinks.data.strIngredient3},{drinks.data.strIngredient4}
+          </p>
+        </div>
+        <p>Instructions: {drinks.data.strInstructions}</p>
       </div>
     </ul>
   )
