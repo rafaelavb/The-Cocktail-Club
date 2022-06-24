@@ -42,6 +42,7 @@ export function getIngredientByName(name) {
 export function getGlassType(name) {
   return request.get(`${serverURL}filter.php?g=${name}`)
 }
+
 export function getDetailbyId(id) {
   return request
     .get(`${serverURL}lookup.php?i=${id}`)

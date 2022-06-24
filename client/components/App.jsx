@@ -12,7 +12,8 @@ import RandomCocktail from './RandomCocktail'
 import PageNotFound from './PageNotFound'
 import DrinkDetail from './DrinkDetail'
 import GlassType from './GlassType'
-import Glass from './Glass'
+import GlassCocktail from './GlassCocktail'
+import GlassFlute from './GlassFlute'
 
 function App() {
   const [cocktail, setCocktail] = useState({ loading: true })
@@ -48,7 +49,8 @@ function App() {
           <Route path="/ingredients" element={<Ingredients />} />
           <Route path="/non-alcoholic" element={<NonAlcoholic />} />
           <Route path="/glasstype" element={<GlassType />} />
-          <Route path="/Glass" element={<Glass />} />
+          <Route path="/Cocktail_glass" element={<GlassCocktail />} />
+          <Route path="/Champagne_flute" element={<GlassFlute />} />
           <Route path="/liquortype" element={<LiquorType />} />
           <Route path="/drink/:idDrink" element={<DrinkDetail />} />
           <Route path="*" element={<PageNotFound />} />
