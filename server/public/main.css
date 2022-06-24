@@ -1,6 +1,6 @@
 body {
   background-color: #c9a21582;
-  color: #fafafa;
+  color: #1d1d1d;
   font-family: 'Poppins', sans-serif;
   background-image: url('./images/background 2.jpg') ; 
   background-size: 25%;
@@ -14,23 +14,36 @@ a{
   text-decoration-line: underline;
 }
 
+img {
+  width: 300px;
+  height: auto
+}
+
 li{
   padding-top: 40px;
   list-style: none;
   text-align: center;
 }
 
-
 .main {
   align-self: start;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
   background-color: rgba(238, 238, 238, 0.644);
+}
+
+
+.NavBar {
+  align-self: start;
+  background-color: rgba(54, 42, 42, 0.332);
   color: rgb(0, 0, 0);
   margin: 0px 10px 0px 10px;
   text-align: center;
   font-size: 30px;
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 160px;
 
 }
 
