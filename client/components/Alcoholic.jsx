@@ -24,19 +24,22 @@ function Alcoholic() {
   }
 
   return (
-    <ul>
-      {drinks.data.map((drink) => (
-        <div key={drink.idDrink}>
-          <Link to={`/drink/${drink.idDrink}`}>
-            <h3>{drink.strDrink}</h3>
-          </Link>
-          <img
-            src={drink.strDrinkThumb}
-            alt={`the alchoholic drink "${drink.strDrink}"`}
-          />
-        </div>
-      ))}
-    </ul>
+    <div className="drinkdisplay">
+      <ul>
+        {drinks.data.map((drink) => (
+          <div key={drink.idDrink}>
+            <Link to={`/drink/${drink.idDrink}`}>
+              <h3>{drink.strDrink}</h3>
+            </Link>
+            <img
+              className="image"
+              src={drink.strDrinkThumb}
+              alt={`the alchoholic drink "${drink.strDrink}"`}
+            />
+          </div>
+        ))}
+      </ul>
+    </div>
   )
 }
 
