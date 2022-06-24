@@ -5,7 +5,9 @@
   "repository": "https://github.com/dev-academy-challenges/worldwide-routing.git",
   "main": "server/index.js",
   "scripts": {
-    "start": "run-p webpack server",
+    "build": "run-p build:client",
+    "build:client": "npm run webpack -- --mode production",
+    "start": "node server",
     "dev": "run-p client server",
     "webpack": "webpack --config client/webpack.config.js",
     "client": "npm run webpack -- --watch",
@@ -63,5 +65,8 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
