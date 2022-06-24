@@ -19,7 +19,6 @@ export function getGinApi() {
 
     .get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`)
     .then((response) => response.body)
-
 }
 
 export function getRandomCocktailApi() {
@@ -40,8 +39,12 @@ export function getIngredientByName(name) {
     .then((response) => response.body)
 }
 
+export function getGlassType(name) {
+  return request.get(`${serverURL}filter.php?g=${name}`)
+}
 export function getDetailbyId(id) {
   return request
     .get(`${serverURL}lookup.php?i=${id}`)
+
     .then((response) => response.body)
 }
