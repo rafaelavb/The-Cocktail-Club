@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { getRandomCocktailApi } from './apiClient'
 
 import Nav from './Nav'
 import Home from './Home'
@@ -9,21 +10,47 @@ import NonAlcoholic from './NonAlcoholic'
 import FilterByIngredients from './FilterByIngredients'
 import RandomCocktail from './RandomCocktail'
 import PageNotFound from './PageNotFound'
+import DrinkDetail from './DrinkDetail'
+import GlassType from './GlassType'
+import Glass from './Glass'
 
 function App() {
+  const [cocktail, setCocktail] = useState({ loading: true })
+  useEffect(() => {
+    getRandomCocktail()
+  }, [])
+
+  const getRandomCocktail = () => {
+    getRandomCocktailApi()
+      .then((data) => {
+        console.log(data, `im the data`)
+        setCocktail({ data: data.drinks })
+      })
+      .catch((err) => {
+        console.log(err.message)
+        setCocktail({ error: err.message })
+      })
+  }
+
   return (
     <>
       {/* This 'main' div is only for styling (so we can use flexbox) */}
       <div className="main">
         <h1>Welcome to The Cocktail Club</h1>
-        <Nav />
+        <Nav fetchCocktail={getRandomCocktail} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/randomcocktail" element={<RandomCocktail />} />
+          <Route
+            path="/randomcocktail"
+            element={<RandomCocktail cocktail={cocktail} />}
+          />
           <Route path="/alcoholic" element={<Alcoholic />} />
           <Route path="/ingredients" element={<FilterByIngredients />} />
           <Route path="/non-alcoholic" element={<NonAlcoholic />} />
+          <Route path="/glasstype" element={<GlassType />} />
+          <Route path="/Glass" element={<Glass />} />
           <Route path="/liquortype" element={<LiquorType />} />
+          <Route path="/drink/:idDrink" element={<DrinkDetail />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
