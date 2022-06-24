@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getGinApi, getVodkaApi } from './apiClient'
+import { Link } from 'react-router-dom'
 
 function LiquorType() {
   const [vodka, setVodka] = useState({ loading: true })
@@ -38,20 +39,24 @@ function LiquorType() {
     <ul>
       <button onClick={handleVodkaClick}>Vodka</button>
       {showVodka && (
-      vodka.loading ? <p>Loading...</p> : vodka.data.map((drink) =>
-        <div key={drink.idDrink}>
-          <h3>{drink.strDrink}</h3>
-          <img src={drink.strDrinkThumb} alt={`the liquor-type drink "${drink.strDrink}"`} />
+        vodka.loading ? <p>Loading...</p> : vodka.data.map((drink) =>
+          <div key={drink.idDrink}>
+            <Link to={`/drink/${drink.idDrink}`}>
+              <h3>{drink.strDrink}</h3>
+            </Link>
+            <img src={drink.strDrinkThumb} alt={`the liquor-type drink "${drink.strDrink}"`} />
 
 
-        </div>))}
+          </div>))}
       <button onClick={handleGinClick}>Gin</button>
       {showGin && (
-      gin.loading ? <p>Loading...</p> : gin.data.map((drink) =>
-        <div key={drink.idDrink}>
-          <h3>{drink.strDrink}</h3>
-          <img src={drink.strDrinkThumb} alt={`the liquor-type drink "${drink.strDrink}"`} />
-        </div>))}
+        gin.loading ? <p>Loading...</p> : gin.data.map((drink) =>
+          <div key={drink.idDrink}>
+            <Link to={`/drink/${drink.idDrink}`}>
+              <h3>{drink.strDrink}</h3>
+            </Link>
+            <img src={drink.strDrinkThumb} alt={`the liquor-type drink "${drink.strDrink}"`} />
+          </div>))}
     </ul>
   )
 
