@@ -16,7 +16,6 @@ export function getVodkaApi() {
 
 export function getGinApi() {
   return request
-
     .get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin`)
     .then((response) => response.body)
 }
@@ -38,6 +37,15 @@ export function getIngredientByName(name) {
     .get(`${serverURL}search.php?i=${name}`)
     .then((response) => response.body)
 }
+export function getIngredientCategories() {
+  return request
+    .get(`${serverURL}list.php?i=list`)
+    .then((response) => response.body)
+}
+
+export function getDrinksByIngredient(name) {
+  return request.get(`${serverURL}filter.php?i=${name}`)
+}
 
 export function getGlassType(name) {
   return request.get(`${serverURL}filter.php?g=${name}`)
@@ -46,6 +54,5 @@ export function getGlassType(name) {
 export function getDetailbyId(id) {
   return request
     .get(`${serverURL}lookup.php?i=${id}`)
-
     .then((response) => response.body)
 }
