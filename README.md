@@ -3,7 +3,7 @@
 After cloning this repo:
 
 
-cd the-cocktail-club,
+cd into the-cocktail-club,
 npm install,
 npm run dev
 
