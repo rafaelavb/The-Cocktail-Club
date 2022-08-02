@@ -1,10 +1,13 @@
-## Setup
+### From the command line
 
-After cloning this repo:
+```
+git clone the repo
+cd into the project
+npm install to install dependencies
+npm run dev to start the dev server
+```
 
-
-cd into the-cocktail-club,
-npm install,
+You can find the server running on [http://localhost:3000](http://localhost:3000).
 npm run dev
 
 
